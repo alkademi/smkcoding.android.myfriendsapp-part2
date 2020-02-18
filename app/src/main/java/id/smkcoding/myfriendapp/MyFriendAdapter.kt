@@ -1,6 +1,7 @@
 package id.smkcoding.myfriendapp
 
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,13 +17,17 @@ class MyFriendAdapter(private val context: Context, private val items: List<MyFr
         ViewHolder(context, LayoutInflater.from(context).inflate(R.layout.my_friends_item, parent, false))
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        holder.bindItem(items.get(position), listener)
+        holder.bindItem(position, items.get(position), listener)
     }
 
     override fun getItemCount(): Int = items.size
 
     class ViewHolder(val context: Context, override val containerView: View) : RecyclerView.ViewHolder(containerView), LayoutContainer {
-        fun bindItem(item: MyFriend, listener: (MyFriend) -> Unit) {
+        fun bindItem(position: Int, item: MyFriend, listener: (MyFriend) -> Unit) {
+
+            Log.d("position", position.toString())
+            Log.d("identity", System.currentTimeMillis().toString())
+
             txtFriendName.text = item.nama
             txtFriendEmail.text = item.email
             txtFriendTelp.text = item.telp
